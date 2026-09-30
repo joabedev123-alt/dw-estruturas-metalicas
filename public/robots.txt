@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /corrimao-inox-curitiba.html
+
+Sitemap: https://dwestruturasmetalicas.com.br/sitemap.xml
