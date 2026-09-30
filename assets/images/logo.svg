@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 70" width="100%" height="100%">
+  <defs>
+    <linearGradient id="dw-steel-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="dw-orange-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7a00" />
+      <stop offset="100%" stop-color="#e65100" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Monogram / Structural I-Beam Logo Mark -->
+  <g transform="translate(4, 5)">
+    <!-- Structural Hexagon / Diamond Frame -->
+    <polygon points="30,0 58,16 58,44 30,60 2,44 2,16" fill="none" stroke="url(#dw-orange-grad)" stroke-width="2.5" stroke-linejoin="round" />
+    
+    <!-- Steel Beam 'D' & 'W' Geometric Construction -->
+    <!-- D profile -->
+    <path d="M16 18 L27 18 C33 18 36 21 36 26 C36 31 33 34 27 34 L16 34 Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" />
+    <line x1="20" y1="18" x2="20" y2="42" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" />
+    
+    <!-- W profile overlay -->
+    <path d="M25 28 L29 42 L34 32 L39 42 L45 28" fill="none" stroke="url(#dw-orange-grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Structural Joint Rivets / Nodes -->
+    <circle cx="30" cy="4" r="2.5" fill="#ff7a00" />
+    <circle cx="56" cy="43" r="2" fill="#ffffff" />
+    <circle cx="4" cy="43" r="2" fill="#ffffff" />
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(74, 12)">
+    <!-- DW Title -->
+    <text x="0" y="26" font-family="'Plus Jakarta Sans', 'Outfit', 'Segoe UI', sans-serif" font-weight="900" font-size="28" fill="#ffffff" letter-spacing="1">DW</text>
+    <text x="56" y="26" font-family="'Plus Jakarta Sans', 'Outfit', 'Segoe UI', sans-serif" font-weight="300" font-size="24" fill="#94a3b8" letter-spacing="0.5">ESTRUTURAS</text>
+    
+    <!-- Subtitle: METÁLICAS -->
+    <text x="1" y="44" font-family="'Plus Jakarta Sans', 'Outfit', 'Segoe UI', sans-serif" font-weight="700" font-size="11" fill="#ff7a00" letter-spacing="4">METÁLICAS</text>
+    <text x="110" y="44" font-family="'Plus Jakarta Sans', 'Outfit', 'Segoe UI', sans-serif" font-weight="500" font-size="10" fill="#64748b" letter-spacing="1.5">• CURITIBA</text>
+  </g>
+</svg>

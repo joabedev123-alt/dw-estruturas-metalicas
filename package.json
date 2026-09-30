@@ -1,0 +1,23 @@
+{
+  "name": "dw-estruturas-metalicas",
+  "version": "1.0.0",
+  "description": "Site Institucional e Landing Page de Alta Conversão para DW Estruturas Metálicas Curitiba",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "organize-images": "node scripts/organize-images.mjs",
+    "serve": "npx -y serve .",
+    "start": "npx -y serve ."
+  },
+  "keywords": [
+    "estruturas metalicas curitiba",
+    "galpao metalico",
+    "mezanino metalico",
+    "pergolado",
+    "gradil",
+    "serralheria industrial"
+  ],
+  "author": "DW Estruturas Metálicas",
+  "license": "ISC"
+}

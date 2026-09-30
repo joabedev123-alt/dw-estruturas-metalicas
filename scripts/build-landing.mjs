@@ -1,0 +1,940 @@
+import fs from 'fs';
+import path from 'path';
+
+const siteConfig = {
+  name: 'DW Estruturas Metálicas',
+  cnpj: '34.803.393/0001-93',
+  address: 'Rua Othoniel Taborda Reinhardt, 451 – Xaxim, Curitiba/PR',
+  phoneDisplay: '(41) 99894-1829',
+  phoneRaw: '5541998941829',
+  whatsappUrl: 'https://wa.me/5541998941829',
+  defaultWaMsg: 'Olá! Vim pelo site da DW Estruturas Metálicas e gostaria de solicitar um orçamento.',
+  yearsExp: 'Mais de 6 anos',
+  factoryLocation: 'Xaxim, Curitiba/PR',
+  baseUrl: 'https://dwestruturasmetalicas.com.br'
+};
+
+function getWaLink(customText) {
+  const msg = customText || siteConfig.defaultWaMsg;
+  return `${siteConfig.whatsappUrl}?text=${encodeURIComponent(msg)}`;
+}
+
+function generateSinglePageLanding() {
+  const schemaJson = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": siteConfig.name,
+    "description": "Projetamos, fabricamos e instalamos estruturas metálicas sob medida, do projeto ao acabamento, com fábrica própria no Xaxim, Curitiba. Mais de 6 anos de atuação.",
+    "telephone": "+55-41-99894-1829",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Othoniel Taborda Reinhardt, 451",
+      "addressLocality": "Curitiba",
+      "addressRegion": "PR",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -25.5085,
+      "longitude": -49.2736
+    },
+    "areaServed": [
+      "Curitiba",
+      "São José dos Pinhais",
+      "Araucária",
+      "Fazenda Rio Grande",
+      "Região Metropolitana de Curitiba"
+    ],
+    "url": siteConfig.baseUrl
+  };
+
+  const html = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a1128" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>DW Estruturas Metálicas | Estrutura Metálica em Curitiba do Projeto à Instalação</title>
+  <meta name="description" content="Projetamos, fabricamos e instalamos estruturas metálicas sob medida em Curitiba e Região Metropolitana. Fábrica própria no Xaxim e mais de 6 anos de atuação. Orçamento no WhatsApp." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="${siteConfig.baseUrl}/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DW Estruturas Metálicas | Fabricação e Instalação em Curitiba" />
+  <meta property="og:description" content="Estruturas metálicas sob medida em Curitiba e Região. Fábrica própria no Xaxim, mais de 6 anos de experiência. Orçamento rápido pelo WhatsApp." />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="${siteConfig.name}" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <!-- Dados Estruturados Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  ${JSON.stringify(schemaJson, null, 2)}
+  </script>
+</head>
+<body id="inicio">
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-item">
+        <i class="bi bi-geo-alt-fill"></i>
+        <span>${siteConfig.address}</span>
+      </div>
+      <div class="top-bar-info">
+        <div class="top-bar-item">
+          <i class="bi bi-shield-check"></i>
+          <span>Fábrica Própria no Xaxim • +6 Anos de Atuação</span>
+        </div>
+        <div class="top-bar-item">
+          <span class="top-bar-badge">Atendimento Rápido via WhatsApp</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho Fixo com Navegação One-Page -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#inicio" class="logo-link" aria-label="DW Estruturas Metálicas - Início">
+        <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas Curitiba" class="logo-img" width="230" height="46" />
+      </a>
+
+      <!-- Menu Desktop One-Page -->
+      <nav class="nav-desktop" aria-label="Navegação Principal">
+        <a href="#inicio" class="nav-link active">Início</a>
+        <a href="#apresentacao" class="nav-link">Sobre</a>
+        <a href="#servicos" class="nav-link">Serviços</a>
+        <a href="#obras" class="nav-link">Obras Realizadas</a>
+        <a href="#diferenciais" class="nav-link">Diferenciais</a>
+        <a href="#regioes" class="nav-link">Regiões</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </nav>
+
+      <!-- Botão Ação Cabeçalho -->
+      <div class="header-actions">
+        <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <i class="bi bi-whatsapp"></i> Solicitar Orçamento
+        </a>
+        <button class="mobile-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Gaveta Mobile One-Page -->
+  <div class="mobile-backdrop"></div>
+  <aside class="mobile-drawer" aria-label="Menu Mobile">
+    <div>
+      <div class="mobile-drawer-header">
+        <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas" style="height: 38px; width: auto;" />
+        <button class="mobile-close-btn" aria-label="Fechar menu"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item"><a href="#inicio"><i class="bi bi-house"></i> Início</a></li>
+        <li class="mobile-nav-item"><a href="#apresentacao"><i class="bi bi-info-circle"></i> Sobre a DW</a></li>
+        <li class="mobile-nav-item"><a href="#servicos"><i class="bi bi-gear-wide-connected"></i> Serviços Sob Medida</a></li>
+        <li class="mobile-nav-item"><a href="#obras"><i class="bi bi-images"></i> Obras Realizadas (Fotos Reais)</a></li>
+        <li class="mobile-nav-item"><a href="#diferenciais"><i class="bi bi-shield-check"></i> Diferenciais</a></li>
+        <li class="mobile-nav-item"><a href="#regioes"><i class="bi bi-geo"></i> Regiões Atendidas</a></li>
+        <li class="mobile-nav-item"><a href="#faq"><i class="bi bi-question-circle"></i> Perguntas Frequentes</a></li>
+        <li class="mobile-nav-item"><a href="#contato"><i class="bi bi-envelope"></i> Solicitar Orçamento</a></li>
+      </ul>
+    </div>
+
+    <div style="padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+      <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="width: 100%;">
+        <i class="bi bi-whatsapp"></i> Conversar no WhatsApp
+      </a>
+      <p style="font-size: 0.8rem; color: #94a3b8; text-align: center; margin-top: 0.75rem;">
+        Tel: ${siteConfig.phoneDisplay}
+      </p>
+    </div>
+  </aside>
+
+  <!-- Conteúdo Principal One-Page -->
+  <main id="conteudo-principal">
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-bg-overlay"></div>
+      <div class="structural-grid-lines"></div>
+      <div class="container hero-content">
+        <div class="hero-subtitle">
+          <span class="badge-tag badge-tag-dark">
+            <i class="bi bi-gear-fill"></i> FABRICAÇÃO PRÓPRIA • CURITIBA E REGIÃO
+          </span>
+        </div>
+        <h1 class="hero-title">
+          Estrutura metálica em Curitiba, do projeto à instalação.
+        </h1>
+        <p class="hero-lead">
+          A DW projeta, fabrica e instala estruturas metálicas sob medida, do projeto ao acabamento. Fábrica própria no Xaxim e mais de 6 anos de atuação em Curitiba e Região Metropolitana.
+        </p>
+        <div class="hero-cta-group">
+          <a href="${getWaLink('Olá! Vim pelo site da DW Estruturas Metálicas e gostaria de solicitar um orçamento.')}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+            <i class="bi bi-whatsapp"></i> Solicitar orçamento pelo WhatsApp
+          </a>
+          <a href="#servicos" class="btn btn-secondary btn-lg">
+            <i class="bi bi-arrow-down-circle"></i> Conhecer nossos serviços
+          </a>
+        </div>
+        <div class="hero-trust-pillars">
+          <div class="trust-pillar-item">
+            <div class="trust-pillar-icon"><i class="bi bi-calendar-check"></i></div>
+            <div class="trust-pillar-text">
+              <h4>Mais de 6 anos</h4>
+              <p>Experiência e solidez no setor metalúrgico.</p>
+            </div>
+          </div>
+          <div class="trust-pillar-item">
+            <div class="trust-pillar-icon"><i class="bi bi-building-gear"></i></div>
+            <div class="trust-pillar-text">
+              <h4>Fábrica no Xaxim</h4>
+              <p>Estrutura própria para fabricação em Curitiba.</p>
+            </div>
+          </div>
+          <div class="trust-pillar-item">
+            <div class="trust-pillar-icon"><i class="bi bi-rulers"></i></div>
+            <div class="trust-pillar-text">
+              <h4>Soluções sob medida</h4>
+              <p>Projetadas para as dimensões da sua obra.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SEÇÃO APRESENTAÇÃO / SOBRE -->
+    <section class="section section-light" id="apresentacao">
+      <div class="container">
+        <div class="grid-2">
+          <div>
+            <span class="badge-tag"><i class="bi bi-check2-circle"></i> APRESENTAÇÃO</span>
+            <h2 class="section-title">Seu projeto ganha estrutura com a DW.</h2>
+            <p class="section-lead">
+              Com fábrica própria localizada no bairro Xaxim, em Curitiba, a DW Estruturas Metálicas atua há mais de 6 anos desenvolvendo projetos sob medida para diferentes necessidades industriais, comerciais e residenciais.
+            </p>
+            <p>
+              Acompanhamos cada etapa com rigor e precisão: desde o projeto técnico inicial e corte de perfis, passando pela fabricação especializada em nossa sede, até o transporte, instalação no local da obra e acabamento completo da estrutura metálica.
+            </p>
+            
+            <div class="about-pillars-list">
+              <div class="about-pillar-card">
+                <i class="bi bi-pencil-ruler"></i>
+                <h4>Projeto & Planejamento</h4>
+                <p>Estudo detalhado das dimensões e especificações necessárias para sua estrutura.</p>
+              </div>
+              <div class="about-pillar-card">
+                <i class="bi bi-tools"></i>
+                <h4>Fabricação Própria</h4>
+                <p>Usinagem, corte, montagem e solda contínua na fábrica do Xaxim.</p>
+              </div>
+              <div class="about-pillar-card">
+                <i class="bi bi-truck"></i>
+                <h4>Instalação no Local</h4>
+                <p>Montagem ágil com fixação segura em Curitiba e cidades metropolitanas.</p>
+              </div>
+              <div class="about-pillar-card">
+                <i class="bi bi-paint-bucket"></i>
+                <h4>Acabamento Completo</h4>
+                <p>Tratamento protetivo e acabamento refinado para máxima durabilidade do aço.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-card">
+            <div class="about-image-wrapper">
+              <img src="assets/images/mezanino/mezanino-2.jpg" alt="Fabricação e instalação de mezanino metálico pela DW Estruturas Metálicas" loading="lazy" width="600" height="480" />
+              <div class="about-badge-floating">
+                <i class="bi bi-award-fill"></i>
+                <div>
+                  <h4>Fábrica Própria no Xaxim</h4>
+                  <p>Rua Othoniel Taborda Reinhardt, 451 • Curitiba/PR</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SEÇÃO SERVIÇOS (12 MODALIDADES COMPLETAS) -->
+    <section class="section section-dark" id="servicos">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag badge-tag-dark"><i class="bi bi-grid-fill"></i> PORTFÓLIO DE SOLUÇÕES</span>
+          <h2 class="section-title" style="color: #ffffff;">Estruturas sob medida para diferentes projetos.</h2>
+          <p class="section-lead">
+            Desenvolvemos estruturas metálicas sob medida com alta precisão e fabricação própria no Xaxim para Curitiba e Região Metropolitana.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <!-- 1. Galpões -->
+          <div class="service-card service-card-featured">
+            <div class="service-icon-box"><i class="bi bi-building"></i></div>
+            <h3 class="service-title">Galpões e Barracões Metálicos — Construção do Zero</h3>
+            <p class="service-description">
+              Construção completa de estruturas metálicas para galpões e barracões industriais, comerciais e centros logísticos. Vãos livres otimizados, tesouras robustas, pilares e fechamentos resistentes com fabricação própria.
+            </p>
+            <div style="margin-top: 1rem;">
+              <a href="${getWaLink('Olá! Gostaria de um orçamento para construção de galpão/barracão metálico.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+                Orçar galpão no WhatsApp <i class="bi bi-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- 2. Mezaninos -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-layers-half"></i></div>
+            <h3 class="service-title">Mezaninos Metálicos</h3>
+            <p class="service-description">
+              Ampliação inteligente de área útil para estoques, lojas, escritórios e galpões. Vigamento estrutural dimensionado sob medida para a carga necessária.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de solicitar um orçamento para mezanino metálico.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar mezanino <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 3. Escadas -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-ladder"></i></div>
+            <h3 class="service-title">Escadas Metálicas</h3>
+            <p class="service-description">
+              Escadas retas, caracol, industriais, marinheiro e para mezaninos com segurança estrutural, degraus reforçados e acabamento de alto padrão.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de solicitar um orçamento para escada metálica.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar escada <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 4. Plataformas Industriais -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-cpu"></i></div>
+            <h3 class="service-title">Plataformas Metálicas Industriais & Metalurgia</h3>
+            <p class="service-description">
+              Plataformas elevadas de operação, passarelas para manutenção técnica e metalurgia industrial customizada para indústrias e fábricas.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para plataformas industriais / passarelas.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar plataforma <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 5. Coberturas -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-shield-shaded"></i></div>
+            <h3 class="service-title">Coberturas e Estruturas Metálicas em Geral</h3>
+            <p class="service-description">
+              Treliças, tesouras e coberturas metálicas para telhados comerciais, industriais, estacionamentos e garagens com telhas termoacústicas ou simples.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para cobertura ou estrutura metálica.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar cobertura <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 6. Pergolados -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-grid-3x3"></i></div>
+            <h3 class="service-title">Pergolados Metálicos</h3>
+            <p class="service-description">
+              Pergolados em aço com design contemporâneo para áreas gourmet, garagens, jardins e residências, preparados para vidro ou policarbonato.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para pergolado metálico.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar pergolado <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 7. Fachadas a Laser -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-aspect-ratio"></i></div>
+            <h3 class="service-title">Fachadas em Aço com Customização a Laser</h3>
+            <p class="service-description">
+              Painéis metálicos decorativos, brises e fachadas arquitetônicas comerciais com recortes geométricos customizados a laser.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para fachada em aço com corte a laser.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar fachada <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 8. Marquises -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-door-open"></i></div>
+            <h3 class="service-title">Marquises Metálicas</h3>
+            <p class="service-description">
+              Proteção para portas de entrada residenciais e comerciais, fachadas de lojas e portarias com fixação sólida e linhas limpas.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para marquise metálica.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar marquise <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 9. Quadras de Esportes -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-dribbble"></i></div>
+            <h3 class="service-title">Quadras de Esportes — Estrutura, Cobertura e Alambrado</h3>
+            <p class="service-description">
+              Projetos estruturais completos para cobertura de quadras poliesportivas, campos society, clubes e condomínios com alambrado perimetral.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para estrutura de quadra de esportes.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar quadra <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 10. Portão Basculante -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-layout-sidebar-inset"></i></div>
+            <h3 class="service-title">Portão Basculante</h3>
+            <p class="service-description">
+              Fabricação sob medida de portões basculantes reforçados para residências, condomínios e portarias industriais com balanceamento suave.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para portão basculante sob medida.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar portão <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 11. Alambrado -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-grid-fill"></i></div>
+            <h3 class="service-title">Alambrado</h3>
+            <p class="service-description">
+              Cercamento firme com tela de alambrado e mourões metálicos para terrenos, quadras esportivas, indústrias e áreas comerciais.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para cercamento com alambrado.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar alambrado <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+
+          <!-- 12. Gradil -->
+          <div class="service-card">
+            <div class="service-icon-box"><i class="bi bi-border-width"></i></div>
+            <h3 class="service-title">Gradil</h3>
+            <p class="service-description">
+              Gradis metálicos reforçados para muros, condomínios, empresas e residências, aliando alta proteção perimetral e acabamento visual durável.
+            </p>
+            <a href="${getWaLink('Olá! Gostaria de um orçamento para gradil metálico.')}" target="_blank" rel="noopener noreferrer" class="service-link">
+              Orçar gradil <i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SEÇÃO OBRAS REALIZADAS (GALERIA COMPLETA DE FOTOS REAIS) -->
+    <section class="section section-light-alt" id="obras">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="bi bi-camera-fill"></i> FOTOGRAFIAS REAIS</span>
+          <h2 class="section-title">Conheça alguns dos nossos trabalhos.</h2>
+          <p class="section-lead">
+            Fotografias reais das estruturas fabricadas e instaladas pela equipe da DW Estruturas Metálicas. Clique em qualquer imagem para abrir em tela cheia.
+          </p>
+        </div>
+
+        <div class="gallery-filter-bar">
+          <button class="filter-btn active" data-filter="all">Todas as Obras (28)</button>
+          <button class="filter-btn" data-filter="mezanino">Mezaninos (10)</button>
+          <button class="filter-btn" data-filter="pergolados">Pergolados (12)</button>
+          <button class="filter-btn" data-filter="gradil">Gradis (6)</button>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Mezaninos (1 a 10) -->
+          ${[1,2,3,4,5,6,7,8,9,10].map(n => `
+            <div class="gallery-item" data-category="mezanino">
+              <img src="assets/images/mezanino/mezanino-${n}.jpg" data-full="assets/images/mezanino/mezanino-${n}.jpg" alt="Mezanino metálico fabricado pela DW Estruturas Metálicas" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Mezanino Metálico</span>
+                <div class="gallery-caption">
+                  <span>Mezanino Metálico</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
+          <!-- Pergolados (1 a 12) -->
+          ${[1,2,3,4,5,6,7,8,9,10,11,12].map(n => `
+            <div class="gallery-item" data-category="pergolados">
+              <img src="assets/images/pergolados/pergolado-${n}.jpg" data-full="assets/images/pergolados/pergolado-${n}.jpg" alt="Pergolado metálico sob medida fabricado pela DW Estruturas Metálicas" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Pergolado Metálico</span>
+                <div class="gallery-caption">
+                  <span>Pergolado Metálico</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
+          <!-- Gradis (1 a 6) -->
+          ${[1,2,3,4,5,6].map(n => `
+            <div class="gallery-item" data-category="gradil">
+              <img src="assets/images/gradil/gradil-${n}.jpg" data-full="assets/images/gradil/gradil-${n}.jpg" alt="Gradil metálico de proteção fabricado pela DW Estruturas Metálicas" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Gradil</span>
+                <div class="gallery-caption">
+                  <span>Gradil</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SEÇÃO DIFERENCIAIS -->
+    <section class="section section-light" id="diferenciais">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="bi bi-shield-check"></i> POR QUE ESCOLHER A DW</span>
+          <h2 class="section-title">Da fabricação ao acabamento, um único parceiro.</h2>
+          <p class="section-lead">
+            Destaques comprovados de quem atua há mais de 6 anos com seriedade e fábrica própria em Curitiba.
+          </p>
+        </div>
+
+        <div class="diferenciais-grid">
+          <div class="diferencial-card">
+            <div class="diferencial-number">01</div>
+            <h3>Fábrica própria no Xaxim</h3>
+            <p>Infraestrutura e maquinário dedicados na Rua Othoniel Taborda Reinhardt, 451, garantindo controle direto de qualidade.</p>
+          </div>
+
+          <div class="diferencial-card">
+            <div class="diferencial-number">02</div>
+            <h3>Mais de 6 anos de atuação</h3>
+            <p>Experiência consolidada na produção, transporte e montagem de estruturas metálicas em Curitiba e Região Metropolitana.</p>
+          </div>
+
+          <div class="diferencial-card">
+            <div class="diferencial-number">03</div>
+            <h3>Projeto, fabricação e instalação</h3>
+            <p>Centralizamos todas as fases: detalhamento do projeto, corte de perfis, soldagem, pintura protetiva e montagem final na obra.</p>
+          </div>
+
+          <div class="diferencial-card">
+            <div class="diferencial-number">04</div>
+            <h3>Estruturas sob medida</h3>
+            <p>Adequação técnica exata às dimensões, cargas estruturais e necessidades específicas do seu projeto arquitetônico.</p>
+          </div>
+
+          <div class="diferencial-card">
+            <div class="diferencial-number">05</div>
+            <h3>Atendimento em Curitiba e Região Metropolitana</h3>
+            <p>Equipe preparada para medições e instalação em Curitiba, São José dos Pinhais, Araucária, Fazenda Rio Grande e municípios vizinhos.</p>
+          </div>
+
+          <div class="diferencial-card" style="background-color: var(--color-primary-900); color: #ffffff;">
+            <div class="diferencial-number" style="color: var(--color-accent);">06</div>
+            <h3 style="color: #ffffff;">Atendimento direto no WhatsApp</h3>
+            <p style="color: var(--text-light-secondary);">
+              Canal ágil sem intermediários para envio de medidas, plantas e orçamentos detalhados.
+            </p>
+            <div style="margin-top: 1rem;">
+              <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+                Conversar pelo WhatsApp <i class="bi bi-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SEÇÃO ETAPAS DO PROCESSO -->
+    <section class="section section-dark-alt" id="etapas">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag badge-tag-dark"><i class="bi bi-diagram-3"></i> FLUXO TRANSPARENTE</span>
+          <h2 class="section-title" style="color: #ffffff;">Processo simples e direto</h2>
+          <p class="section-lead">
+            Como funciona da solicitação inicial à conclusão da sua estrutura:
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-card">
+            <div class="process-step-badge">1</div>
+            <h4>Conte o que você precisa</h4>
+            <p>Inicie a conversa no WhatsApp informando o tipo de estrutura metálica desejada para sua obra.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-step-badge">2</div>
+            <h4>Envie dados do projeto</h4>
+            <p>Compartilhe medidas aproximadas, fotos do local da obra ou referências técnicas.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-step-badge">3</div>
+            <h4>Solicite uma proposta</h4>
+            <p>Receba a proposta técnica sob medida para a fabricação e instalação da sua estrutura.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-step-badge">4</div>
+            <h4>Projeto, fabricação e instalação</h4>
+            <p>Execução completa: produção na oficina no Xaxim, montagem no local e acabamento conforme escopo contratado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SEÇÃO REGIÕES ATENDIDAS (CURITIBA E RMC) -->
+    <section class="section section-light" id="regioes">
+      <div class="container">
+        <div class="regions-card">
+          <div class="section-header-left">
+            <span class="badge-tag"><i class="bi bi-geo-alt-fill"></i> COBERTURA GEOGRÁFICA</span>
+            <h2 class="section-title">Curitiba e Região Metropolitana.</h2>
+            <p class="section-lead">
+              Nossa fábrica própria está sediada no bairro Xaxim, em Curitiba. A partir dessa localização estratégica, realizamos medições, fabricação e montagem completa em toda a capital e cidades metropolitanas:
+            </p>
+          </div>
+
+          <div class="regions-cities-grid">
+            <div class="region-city-box">
+              <i class="bi bi-buildings"></i>
+              <h4>Curitiba</h4>
+              <span>Sede própria no bairro Xaxim</span>
+            </div>
+            <div class="region-city-box">
+              <i class="bi bi-pin-map"></i>
+              <h4>São José dos Pinhais</h4>
+              <span>Galpões, mezaninos e estruturas</span>
+            </div>
+            <div class="region-city-box">
+              <i class="bi bi-pin-map"></i>
+              <h4>Araucária</h4>
+              <span>Plataformas e setor industrial</span>
+            </div>
+            <div class="region-city-box">
+              <i class="bi bi-pin-map"></i>
+              <h4>Fazenda Rio Grande</h4>
+              <span>Barracões, mezaninos e gradis</span>
+            </div>
+          </div>
+
+          <div class="curitiba-neighborhoods-box">
+            <h4><i class="bi bi-compass"></i> Atendimento nos bairros de Curitiba:</h4>
+            <p style="font-size: 0.9rem; color: var(--text-dark-secondary); margin-bottom: 0.85rem;">
+              Fabricamos e instalamos estruturas metálicas em todos os bairros da capital paranaense, incluindo:
+            </p>
+            <div class="neighborhoods-tags">
+              <span class="nh-tag">Xaxim</span>
+              <span class="nh-tag">Boqueirão</span>
+              <span class="nh-tag">Alto Boqueirão</span>
+              <span class="nh-tag">Hauer</span>
+              <span class="nh-tag">Pinheirinho</span>
+              <span class="nh-tag">Sítio Cercado</span>
+              <span class="nh-tag">Capão Raso</span>
+              <span class="nh-tag">Novo Mundo</span>
+              <span class="nh-tag">Tatuquara</span>
+              <span class="nh-tag">CIC (Cidade Industrial de Curitiba)</span>
+              <span class="nh-tag">Uberaba</span>
+              <span class="nh-tag">Demais bairros e cidades da RMC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. SEÇÃO FAQ (DÚVIDAS FREQUENTES) -->
+    <section class="section section-light-alt" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="bi bi-question-circle"></i> DÚVIDAS FREQUENTES</span>
+          <h2 class="section-title">Perguntas Frequentes sobre Contratação</h2>
+          <p class="section-lead">
+            Informações claras e transparentes para quem deseja contratar estruturas metálicas com a DW.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <!-- FAQ 1 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Como solicitar um orçamento?</span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                O caminho principal e mais rápido é entrar em contato pelo nosso WhatsApp <strong>(41) 99894-1829</strong>. Você também pode preencher o formulário rápido abaixo, que direcionará os dados preenchidos diretamente para nossa equipe no WhatsApp.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Quais regiões a DW atende?</span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Atendemos Curitiba (com fábrica própria no bairro Xaxim), São José dos Pinhais, Araucária, Fazenda Rio Grande e demais cidades da Região Metropolitana.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>A empresa fabrica e instala as estruturas?</span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Sim. A DW projeta, fabrica e realiza a montagem e instalação no local da obra, além de executar o acabamento da estrutura conforme o escopo contratado.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Quais informações ajudam a preparar o orçamento?</span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Para agilizar a análise, é recomendável informar o tipo de serviço (ex: galpão, mezanino, pergolado, gradil), as medidas aproximadas (largura, comprimento e altura), o bairro ou cidade da instalação e fotos ou desenhos do local caso possua.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>O que influencia o custo de uma estrutura metálica?</span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                O custo depende diretamente das particularidades do projeto: dimensões totais, tipo e espessura dos perfis de aço, complexidade do vão e da fixação, condições de acesso ao local de montagem e acabamentos acordados. Avaliamos cada projeto sob medida.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>O prazo depende de quais características do projeto?</span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                O prazo de fabricação e montagem varia conforme a complexidade e dimensões da estrutura, o volume de peças a produzir na oficina e as condições do local para a fixação. A previsão de entrega é informada na proposta técnica.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. SEÇÃO CTA FINAL & FORMULÁRIO RÁPIDO WHATSAPP -->
+    <section class="quote-section" id="contato">
+      <div class="container">
+        <div class="quote-grid">
+          <div class="quote-info">
+            <span class="badge-tag badge-tag-dark"><i class="bi bi-chat-dots-fill"></i> SOLICITE SEU ORÇAMENTO</span>
+            <h2>Vamos dar estrutura ao seu próximo projeto?</h2>
+            <p>
+              Conte o que você precisa e solicite um orçamento à DW Estruturas Metálicas.
+            </p>
+
+            <div class="quote-direct-wa">
+              <i class="bi bi-whatsapp"></i>
+              <div>
+                <h4>Prefere atendimento imediato?</h4>
+                <p>Clique no botão para abrir diretamente nosso canal de atendimento:</p>
+                <div style="margin-top: 0.65rem;">
+                  <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="padding: 0.65rem 1.25rem; font-size: 0.88rem;">
+                    <i class="bi bi-whatsapp"></i> Conversar pelo WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div style="font-size: 0.88rem; color: var(--text-light-muted); line-height: 1.8;">
+              <p><i class="bi bi-geo-alt-fill" style="color: var(--color-accent);"></i> <strong>Endereço:</strong> Rua Othoniel Taborda Reinhardt, 451 – Xaxim, Curitiba/PR</p>
+              <p><i class="bi bi-telephone-fill" style="color: var(--color-accent);"></i> <strong>Telefone/WhatsApp:</strong> (41) 99894-1829</p>
+              <p><i class="bi bi-building" style="color: var(--color-accent);"></i> <strong>CNPJ:</strong> 34.803.393/0001-93</p>
+            </div>
+          </div>
+
+          <!-- Formulário Curto Integrado ao WhatsApp -->
+          <div class="quote-form-card">
+            <h3 style="color: #ffffff; font-size: 1.35rem; margin-bottom: 0.5rem;">Formulário de Orçamento</h3>
+            <p style="font-size: 0.88rem; color: var(--text-light-secondary); margin-bottom: 1.5rem;">
+              Preencha os campos abaixo para iniciar a conversa no WhatsApp com os dados do seu projeto:
+            </p>
+
+            <form class="quote-form">
+              <div class="form-group">
+                <label class="form-label" for="quote-nome">Nome *</label>
+                <input type="text" id="quote-nome" name="nome" class="form-control" placeholder="Seu nome completo" required />
+              </div>
+
+              <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
+                <div class="form-group">
+                  <label class="form-label" for="quote-tel">Telefone / WhatsApp *</label>
+                  <input type="tel" id="quote-tel" name="telefone" class="form-control" placeholder="(41) 99894-1829" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="quote-cidade">Cidade / Bairro</label>
+                  <input type="text" id="quote-cidade" name="cidade" class="form-control" placeholder="Ex: Curitiba - Xaxim" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="quote-servico">Serviço Desejado</label>
+                <select id="quote-servico" name="servico" class="form-control">
+                  <option value="Galpão ou Barracão Metálico">Galpões e Barracões Metálicos — Construção do Zero</option>
+                  <option value="Mezanino Metálico">Mezaninos Metálicos</option>
+                  <option value="Escada Metálica">Escadas Metálicas</option>
+                  <option value="Plataforma Industrial">Plataformas Metálicas Industriais e Metalurgia</option>
+                  <option value="Cobertura Metálica">Coberturas e Estruturas Metálicas em Geral</option>
+                  <option value="Pergolado Metálico">Pergolados Metálicos</option>
+                  <option value="Fachada em Aço Corte a Laser">Fachadas em Aço com Customização a Laser</option>
+                  <option value="Marquise Metálica">Marquises Metálicas</option>
+                  <option value="Quadra de Esportes">Quadras de Esportes — Estrutura, Cobertura e Alambrado</option>
+                  <option value="Portão Basculante">Portão Basculante</option>
+                  <option value="Alambrado">Alambrado</option>
+                  <option value="Gradil">Gradil</option>
+                  <option value="Outra Estrutura Metálica">Outro Projeto Sob Medida</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="quote-msg">Breve descrição do projeto (opcional)</label>
+                <textarea id="quote-msg" name="mensagem" class="form-control" placeholder="Medidas aproximadas, finalidade ou detalhes do local..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1rem;">
+                <i class="bi bi-arrow-right-circle"></i> Solicitar orçamento
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Oficial One-Page -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Coluna 1: Marca & Resumo -->
+        <div class="footer-brand">
+          <a href="#inicio">
+            <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas" style="height: 44px; width: auto;" />
+          </a>
+          <p>
+            A DW projeta, fabrica e instala estruturas metálicas sob medida, do projeto ao acabamento. Fábrica própria no bairro Xaxim e mais de 6 anos de atuação em Curitiba e Região Metropolitana.
+          </p>
+          <div style="display: flex; gap: 0.5rem; align-items: center; color: #22c55e; font-size: 0.85rem; font-weight: 600;">
+            <i class="bi bi-patch-check-fill"></i> Fabricação Própria & Instalação
+          </div>
+        </div>
+
+        <!-- Coluna 2: Navegação Interna -->
+        <div>
+          <h4 class="footer-heading">Navegação</h4>
+          <ul class="footer-links">
+            <li><a href="#inicio"><i class="bi bi-chevron-right"></i> Início</a></li>
+            <li><a href="#apresentacao"><i class="bi bi-chevron-right"></i> Sobre a Empresa</a></li>
+            <li><a href="#servicos"><i class="bi bi-chevron-right"></i> Serviços Sob Medida</a></li>
+            <li><a href="#obras"><i class="bi bi-chevron-right"></i> Galeria de Obras Reais</a></li>
+            <li><a href="#diferenciais"><i class="bi bi-chevron-right"></i> Diferenciais Confirmados</a></li>
+            <li><a href="#regioes"><i class="bi bi-chevron-right"></i> Regiões Atendidas</a></li>
+            <li><a href="#faq"><i class="bi bi-chevron-right"></i> Perguntas Frequentes</a></li>
+            <li><a href="#contato"><i class="bi bi-chevron-right"></i> Orçamento no WhatsApp</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Regiões -->
+        <div>
+          <h4 class="footer-heading">Região Atendida</h4>
+          <ul class="footer-links">
+            <li><a href="#regioes"><i class="bi bi-geo-alt"></i> Curitiba (Xaxim, CIC, etc.)</a></li>
+            <li><a href="#regioes"><i class="bi bi-geo-alt"></i> São José dos Pinhais</a></li>
+            <li><a href="#regioes"><i class="bi bi-geo-alt"></i> Araucária</a></li>
+            <li><a href="#regioes"><i class="bi bi-geo-alt"></i> Fazenda Rio Grande</a></li>
+            <li><a href="#regioes"><i class="bi bi-geo-alt"></i> Demais Cidades da RMC</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Contato Oficial -->
+        <div>
+          <h4 class="footer-heading">Contato & Fábrica</h4>
+          <div class="footer-contact-item">
+            <i class="bi bi-geo-alt-fill"></i>
+            <div>
+              <strong>Fábrica Própria:</strong><br />
+              ${siteConfig.address}
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-whatsapp"></i>
+            <div>
+              <strong>WhatsApp / Telefone:</strong><br />
+              <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" style="color: #22c55e; font-weight: 600;">
+                ${siteConfig.phoneDisplay}
+              </a>
+            </div>
+          </div>
+          <div style="margin-top: 1.25rem;">
+            <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; font-size: 0.88rem; padding: 0.75rem 1rem;">
+              <i class="bi bi-whatsapp"></i> Orçamento Direto
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé Inferior -->
+      <div class="footer-bottom">
+        <div>
+          © ${new Date().getFullYear()} ${siteConfig.name}. Todos os direitos reservados.
+        </div>
+        <div class="footer-cnpj">
+          CNPJ: ${siteConfig.cnpj}
+        </div>
+        <div>
+          <a href="https://camaly.com.br/" target="_blank" rel="noopener noreferrer" class="footer-credit-link" title="Desenvolvido por CAMALY">
+            <span>Produzida com</span>
+            <span class="pulsing-heart-orange" aria-hidden="true"><i class="bi bi-suit-heart-fill"></i></span>
+            <span>por</span>
+            <span class="footer-credit-brand">CAMALY</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão Flutuante do WhatsApp -->
+  <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Solicitar orçamento pelo WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+    <span class="whatsapp-float-tooltip">Orçamento no WhatsApp</span>
+  </a>
+
+  <!-- Script Principal -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>`;
+
+  fs.writeFileSync('index.html', html, 'utf8');
+  console.log('Generated Unified Single Page Landing: index.html');
+}
+
+generateSinglePageLanding();
