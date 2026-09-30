@@ -67,8 +67,10 @@ function generateSinglePageLanding() {
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:site_name" content="${siteConfig.name}" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <!-- Favicon / Ícone do Navegador e Google -->
+  <link rel="icon" type="image/png" href="assets/images/logo-01.png" />
+  <link rel="shortcut icon" type="image/png" href="assets/images/logo-01.png" />
+  <link rel="apple-touch-icon" href="assets/images/logo-01.png" />
   
   <!-- CSS Principal -->
   <link rel="stylesheet" href="assets/css/main.css" />
@@ -103,7 +105,7 @@ function generateSinglePageLanding() {
   <header class="header">
     <div class="container header-inner">
       <a href="#inicio" class="logo-link" aria-label="DW Estruturas Metálicas - Início">
-        <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas Curitiba" class="logo-img" width="230" height="46" />
+        <img src="assets/images/logo-01.png" alt="DW Estruturas Metálicas Curitiba" class="logo-img" width="340" height="78" style="object-fit: contain; height: 78px; width: auto;" />
       </a>
 
       <!-- Menu Desktop One-Page -->
@@ -121,7 +123,7 @@ function generateSinglePageLanding() {
       <!-- Botão Ação Cabeçalho -->
       <div class="header-actions">
         <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          <i class="bi bi-whatsapp"></i> Solicitar Orçamento
+          <i class="bi bi-whatsapp"></i> SOLICITAR ORÇAMENTO
         </a>
         <button class="mobile-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
           <i class="bi bi-list"></i>
@@ -135,7 +137,7 @@ function generateSinglePageLanding() {
   <aside class="mobile-drawer" aria-label="Menu Mobile">
     <div>
       <div class="mobile-drawer-header">
-        <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas" style="height: 38px; width: auto;" />
+        <img src="assets/images/logo-01.png" alt="DW Estruturas Metálicas" style="height: 52px; width: auto; object-fit: contain;" />
         <button class="mobile-close-btn" aria-label="Fechar menu"><i class="bi bi-x-lg"></i></button>
       </div>
       <ul class="mobile-nav-list">
@@ -152,7 +154,7 @@ function generateSinglePageLanding() {
 
     <div style="padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
       <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="width: 100%;">
-        <i class="bi bi-whatsapp"></i> Conversar no WhatsApp
+        <i class="bi bi-whatsapp"></i> CONVERSAR NO WHATSAPP
       </a>
       <p style="font-size: 0.8rem; color: #94a3b8; text-align: center; margin-top: 0.75rem;">
         Tel: ${siteConfig.phoneDisplay}
@@ -181,10 +183,10 @@ function generateSinglePageLanding() {
         </p>
         <div class="hero-cta-group">
           <a href="${getWaLink('Olá! Vim pelo site da DW Estruturas Metálicas e gostaria de solicitar um orçamento.')}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-            <i class="bi bi-whatsapp"></i> Solicitar orçamento pelo WhatsApp
+            <i class="bi bi-whatsapp"></i> SOLICITAR ORÇAMENTO PELO WHATSAPP
           </a>
           <a href="#servicos" class="btn btn-secondary btn-lg">
-            <i class="bi bi-arrow-down-circle"></i> Conhecer nossos serviços
+            <i class="bi bi-arrow-down-circle"></i> CONHECER NOSSOS SERVIÇOS
           </a>
         </div>
         <div class="hero-trust-pillars">
@@ -288,7 +290,7 @@ function generateSinglePageLanding() {
             </p>
             <div style="margin-top: 1rem;">
               <a href="${getWaLink('Olá! Gostaria de um orçamento para construção de galpão/barracão metálico.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-                Orçar galpão no WhatsApp <i class="bi bi-whatsapp"></i>
+                ORÇAR GALPÃO NO WHATSAPP <i class="bi bi-whatsapp"></i>
               </a>
             </div>
           </div>
@@ -301,7 +303,7 @@ function generateSinglePageLanding() {
               Ampliação inteligente de área útil para estoques, lojas, escritórios e galpões. Vigamento estrutural dimensionado sob medida para a carga necessária.
             </p>
             <a href="${getWaLink('Olá! Gostaria de solicitar um orçamento para mezanino metálico.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar mezanino <i class="bi bi-whatsapp"></i>
+              ORÇAR MEZANINO <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -313,7 +315,7 @@ function generateSinglePageLanding() {
               Escadas retas, caracol, industriais, marinheiro e para mezaninos com segurança estrutural, degraus reforçados e acabamento de alto padrão.
             </p>
             <a href="${getWaLink('Olá! Gostaria de solicitar um orçamento para escada metálica.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar escada <i class="bi bi-whatsapp"></i>
+              ORÇAR ESCADA <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -325,7 +327,7 @@ function generateSinglePageLanding() {
               Plataformas elevadas de operação, passarelas para manutenção técnica e metalurgia industrial customizada para indústrias e fábricas.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para plataformas industriais / passarelas.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar plataforma <i class="bi bi-whatsapp"></i>
+              ORÇAR PLATAFORMA <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -337,7 +339,7 @@ function generateSinglePageLanding() {
               Treliças, tesouras e coberturas metálicas para telhados comerciais, industriais, estacionamentos e garagens com telhas termoacústicas ou simples.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para cobertura ou estrutura metálica.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar cobertura <i class="bi bi-whatsapp"></i>
+              ORÇAR COBERTURA <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -349,7 +351,7 @@ function generateSinglePageLanding() {
               Pergolados em aço com design contemporâneo para áreas gourmet, garagens, jardins e residências, preparados para vidro ou policarbonato.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para pergolado metálico.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar pergolado <i class="bi bi-whatsapp"></i>
+              ORÇAR PERGOLADO <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -361,7 +363,7 @@ function generateSinglePageLanding() {
               Painéis metálicos decorativos, brises e fachadas arquitetônicas comerciais com recortes geométricos customizados a laser.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para fachada em aço com corte a laser.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar fachada <i class="bi bi-whatsapp"></i>
+              ORÇAR FACHADA <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -373,7 +375,7 @@ function generateSinglePageLanding() {
               Proteção para portas de entrada residenciais e comerciais, fachadas de lojas e portarias com fixação sólida e linhas limpas.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para marquise metálica.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar marquise <i class="bi bi-whatsapp"></i>
+              ORÇAR MARQUISE <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -385,7 +387,7 @@ function generateSinglePageLanding() {
               Projetos estruturais completos para cobertura de quadras poliesportivas, campos society, clubes e condomínios com alambrado perimetral.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para estrutura de quadra de esportes.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar quadra <i class="bi bi-whatsapp"></i>
+              ORÇAR QUADRA <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -397,7 +399,7 @@ function generateSinglePageLanding() {
               Fabricação sob medida de portões basculantes reforçados para residências, condomínios e portarias industriais com balanceamento suave.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para portão basculante sob medida.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar portão <i class="bi bi-whatsapp"></i>
+              ORÇAR PORTÃO <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -409,7 +411,7 @@ function generateSinglePageLanding() {
               Cercamento firme com tela de alambrado e mourões metálicos para terrenos, quadras esportivas, indústrias e áreas comerciais.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para cercamento com alambrado.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar alambrado <i class="bi bi-whatsapp"></i>
+              ORÇAR ALAMBRADO <i class="bi bi-whatsapp"></i>
             </a>
           </div>
 
@@ -421,7 +423,7 @@ function generateSinglePageLanding() {
               Gradis metálicos reforçados para muros, condomínios, empresas e residências, aliando alta proteção perimetral e acabamento visual durável.
             </p>
             <a href="${getWaLink('Olá! Gostaria de um orçamento para gradil metálico.')}" target="_blank" rel="noopener noreferrer" class="service-link">
-              Orçar gradil <i class="bi bi-whatsapp"></i>
+              ORÇAR GRADIL <i class="bi bi-whatsapp"></i>
             </a>
           </div>
         </div>
@@ -440,10 +442,12 @@ function generateSinglePageLanding() {
         </div>
 
         <div class="gallery-filter-bar">
-          <button class="filter-btn active" data-filter="all">Todas as Obras (28)</button>
+          <button class="filter-btn active" data-filter="all">Todas as Obras (52)</button>
           <button class="filter-btn" data-filter="mezanino">Mezaninos (10)</button>
           <button class="filter-btn" data-filter="pergolados">Pergolados (12)</button>
           <button class="filter-btn" data-filter="gradil">Gradis (6)</button>
+          <button class="filter-btn" data-filter="alambrados">Alambrados (10)</button>
+          <button class="filter-btn" data-filter="escadas">Escadas (14)</button>
         </div>
 
         <div class="gallery-grid">
@@ -483,6 +487,34 @@ function generateSinglePageLanding() {
                 <span class="gallery-category-badge">Gradil</span>
                 <div class="gallery-caption">
                   <span>Gradil</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
+          <!-- Alambrados (1 a 10) -->
+          ${[1,2,3,4,5,6,7,8,9,10].map(n => `
+            <div class="gallery-item" data-category="alambrados">
+              <img src="assets/images/alambrados/alambrado-${n}.jpg" data-full="assets/images/alambrados/alambrado-${n}.jpg" alt="Alambrado e cercamento metálico fabricado pela DW Estruturas Metálicas" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Alambrados</span>
+                <div class="gallery-caption">
+                  <span>Alambrados</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
+          <!-- Escadas (1 a 14) -->
+          ${[1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(n => `
+            <div class="gallery-item" data-category="escadas">
+              <img src="assets/images/escadas/escada-${n}.jpg" data-full="assets/images/escadas/escada-${n}.jpg" alt="Escada metálica sob medida fabricada pela DW Estruturas Metálicas" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Escadas</span>
+                <div class="gallery-caption">
+                  <span>Escadas</span>
                   <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
                 </div>
               </div>
@@ -540,9 +572,9 @@ function generateSinglePageLanding() {
             <p style="color: var(--text-light-secondary);">
               Canal ágil sem intermediários para envio de medidas, plantas e orçamentos detalhados.
             </p>
-            <div style="margin-top: 1rem;">
-              <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
-                Conversar pelo WhatsApp <i class="bi bi-whatsapp"></i>
+            <div style="margin-top: 1.25rem;">
+              <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="font-size: 0.85rem; padding: 0.65rem 1.4rem;">
+                <i class="bi bi-whatsapp"></i> CONVERSAR PELO WHATSAPP
               </a>
             </div>
           </div>
@@ -759,7 +791,7 @@ function generateSinglePageLanding() {
                 <p>Clique no botão para abrir diretamente nosso canal de atendimento:</p>
                 <div style="margin-top: 0.65rem;">
                   <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="padding: 0.65rem 1.25rem; font-size: 0.88rem;">
-                    <i class="bi bi-whatsapp"></i> Conversar pelo WhatsApp
+                    <i class="bi bi-whatsapp"></i> CONVERSAR PELO WHATSAPP
                   </a>
                 </div>
               </div>
@@ -821,7 +853,7 @@ function generateSinglePageLanding() {
               </div>
 
               <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1rem;">
-                <i class="bi bi-arrow-right-circle"></i> Solicitar orçamento
+                <i class="bi bi-arrow-right-circle"></i> SOLICITAR ORÇAMENTO
               </button>
             </form>
           </div>
@@ -838,7 +870,7 @@ function generateSinglePageLanding() {
         <!-- Coluna 1: Marca & Resumo -->
         <div class="footer-brand">
           <a href="#inicio">
-            <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas" style="height: 44px; width: auto;" />
+            <img src="assets/images/logo-01.png" alt="DW Estruturas Metálicas" style="height: 68px; width: auto; object-fit: contain;" />
           </a>
           <p>
             A DW projeta, fabrica e instala estruturas metálicas sob medida, do projeto ao acabamento. Fábrica própria no bairro Xaxim e mais de 6 anos de atuação em Curitiba e Região Metropolitana.
@@ -896,7 +928,7 @@ function generateSinglePageLanding() {
           </div>
           <div style="margin-top: 1.25rem;">
             <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; font-size: 0.88rem; padding: 0.75rem 1rem;">
-              <i class="bi bi-whatsapp"></i> Orçamento Direto
+              <i class="bi bi-whatsapp"></i> ORÇAMENTO DIRETO
             </a>
           </div>
         </div>
@@ -925,7 +957,7 @@ function generateSinglePageLanding() {
   <!-- Botão Flutuante do WhatsApp -->
   <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Solicitar orçamento pelo WhatsApp">
     <i class="bi bi-whatsapp"></i>
-    <span class="whatsapp-float-tooltip">Orçamento no WhatsApp</span>
+    <span class="whatsapp-float-tooltip">ORÇAMENTO NO WHATSAPP</span>
   </a>
 
   <!-- Script Principal -->
@@ -949,6 +981,9 @@ function generateSinglePageLanding() {
     fs.copyFileSync('sitemap.xml', path.join('public', 'sitemap.xml'));
   }
   if (fs.existsSync('assets')) {
+    if (fs.existsSync(path.join('public', 'assets'))) {
+      fs.rmSync(path.join('public', 'assets'), { recursive: true, force: true });
+    }
     fs.cpSync('assets', path.join('public', 'assets'), { recursive: true });
   }
   console.log('Generated Vercel Public Distribution Folder: public/');

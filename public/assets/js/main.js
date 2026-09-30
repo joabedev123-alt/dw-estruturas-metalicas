@@ -308,7 +308,7 @@ function initQuoteForms() {
       }
 
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Preparando WhatsApp...';
+      submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> PREPARANDO WHATSAPP...';
 
       let text = `Olá! Vim pelo site da DW Estruturas Metálicas e gostaria de solicitar um orçamento.\n\n`;
       text += `*Nome:* ${nome}\n`;
@@ -327,7 +327,7 @@ function initQuoteForms() {
         statusBox.innerHTML = `<strong>Pronto!</strong> Redirecionando para o WhatsApp da DW Estruturas Metálicas... Caso não abra automaticamente, <a href="${whatsappUrl}" target="_blank" style="text-decoration: underline; font-weight: bold; color: inherit;">clique aqui para continuar no WhatsApp</a>.`;
 
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="bi bi-whatsapp"></i> Continuar no WhatsApp';
+        submitBtn.innerHTML = '<i class="bi bi-whatsapp"></i> CONTINUAR NO WHATSAPP';
         submitBtn.onclick = () => { window.open(whatsappUrl, '_blank'); };
 
         window.open(whatsappUrl, '_blank');

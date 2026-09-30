@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 
 const categories = [
+  { dir: 'assets/images/alambrados', prefix: 'alambrado' },
+  { dir: 'assets/images/escadas', prefix: 'escada' },
   { dir: 'assets/images/gradil', prefix: 'gradil' },
   { dir: 'assets/images/mezanino', prefix: 'mezanino' },
   { dir: 'assets/images/pergolados', prefix: 'pergolado' }

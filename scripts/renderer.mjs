@@ -86,7 +86,7 @@ function renderPage({
   <meta property="og:site_name" content="${siteConfig.name}" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.png" />
   
   <!-- CSS Principal -->
   <link rel="stylesheet" href="assets/css/main.css" />
@@ -121,7 +121,7 @@ function renderPage({
   <header class="header">
     <div class="container header-inner">
       <a href="index.html" class="logo-link" aria-label="DW Estruturas Metálicas - Página Inicial">
-        <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas Curitiba" class="logo-img" width="230" height="46" />
+        <img src="assets/images/logo.png" alt="DW Estruturas Metálicas Curitiba" class="logo-img" width="230" height="46" />
       </a>
 
       <!-- Menu Desktop -->
@@ -208,7 +208,7 @@ function renderPage({
   <aside class="mobile-drawer" aria-label="Menu Mobile">
     <div>
       <div class="mobile-drawer-header">
-        <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas" style="height: 38px; width: auto;" />
+        <img src="assets/images/logo.png" alt="DW Estruturas Metálicas" style="height: 38px; width: auto;" />
         <button class="mobile-close-btn" aria-label="Fechar menu"><i class="bi bi-x-lg"></i></button>
       </div>
       <ul class="mobile-nav-list">
@@ -275,7 +275,7 @@ function renderPage({
         <!-- Coluna 1: Marca & Resumo -->
         <div class="footer-brand">
           <a href="index.html">
-            <img src="assets/images/logo.svg" alt="DW Estruturas Metálicas" style="height: 44px; width: auto;" />
+            <img src="assets/images/logo.png" alt="DW Estruturas Metálicas" style="height: 44px; width: auto;" />
           </a>
           <p>
             A DW projeta, fabrica e instala estruturas metálicas sob medida, do projeto ao acabamento. Fábrica própria no bairro Xaxim e mais de 6 anos de atuação em Curitiba e toda a Região Metropolitana.
