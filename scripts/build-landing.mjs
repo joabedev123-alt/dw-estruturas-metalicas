@@ -442,15 +442,30 @@ function generateSinglePageLanding() {
         </div>
 
         <div class="gallery-filter-bar">
-          <button class="filter-btn active" data-filter="all">Todas as Obras (52)</button>
+          <button class="filter-btn active" data-filter="all">Todas as Obras (66)</button>
+          <button class="filter-btn" data-filter="galpoes">Galpões (15)</button>
           <button class="filter-btn" data-filter="mezanino">Mezaninos (10)</button>
-          <button class="filter-btn" data-filter="pergolados">Pergolados (12)</button>
+          <button class="filter-btn" data-filter="pergolados">Pergolados (11)</button>
           <button class="filter-btn" data-filter="gradil">Gradis (6)</button>
           <button class="filter-btn" data-filter="alambrados">Alambrados (10)</button>
           <button class="filter-btn" data-filter="escadas">Escadas (14)</button>
         </div>
 
         <div class="gallery-grid">
+          <!-- Galpões Metálicos (1 a 15) -->
+          ${[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(n => `
+            <div class="gallery-item" data-category="galpoes">
+              <img src="assets/images/galpoes/galpao-${n}.jpg" data-full="assets/images/galpoes/galpao-${n}.jpg" alt="Galpão metálico fabricado e montado pela DW Estruturas Metálicas" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Galpão Metálico</span>
+                <div class="gallery-caption">
+                  <span>Galpão Metálico</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
           <!-- Mezaninos (1 a 10) -->
           ${[1,2,3,4,5,6,7,8,9,10].map(n => `
             <div class="gallery-item" data-category="mezanino">
@@ -465,8 +480,8 @@ function generateSinglePageLanding() {
             </div>
           `).join('')}
 
-          <!-- Pergolados (1 a 12) -->
-          ${[1,2,3,4,5,6,7,8,9,10,11,12].map(n => `
+          <!-- Pergolados (1 a 11) -->
+          ${[1,2,3,4,5,6,7,8,9,10,11].map(n => `
             <div class="gallery-item" data-category="pergolados">
               <img src="assets/images/pergolados/pergolado-${n}.jpg" data-full="assets/images/pergolados/pergolado-${n}.jpg" alt="Pergolado metálico sob medida fabricado pela DW Estruturas Metálicas" loading="lazy" />
               <div class="gallery-overlay">

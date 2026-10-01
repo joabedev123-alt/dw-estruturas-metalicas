@@ -640,7 +640,8 @@ button, input, select, textarea {
 
 @media (max-width: 480px) {
   .logo-img {
-    height: 36px;
+    height: 48px;
+    max-height: 52px;
   }
   .top-bar {
     font-size: 0.75rem;
@@ -1084,6 +1085,12 @@ button, input, select, textarea {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gallery-filter-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .filter-btn {
@@ -1099,6 +1106,7 @@ button, input, select, textarea {
   cursor: pointer;
   transition: all var(--transition-fast);
   box-shadow: var(--shadow-sm);
+  white-space: nowrap;
 }
 
 .filter-btn:hover, .filter-btn.active {
@@ -1124,6 +1132,7 @@ button, input, select, textarea {
   border: 1px solid var(--border-light);
   cursor: pointer;
   aspect-ratio: 4 / 3;
+  touch-action: manipulation;
 }
 
 .gallery-item img {
@@ -1202,12 +1211,15 @@ button, input, select, textarea {
   .gallery-filter-bar {
     justify-content: flex-start;
     overflow-x: auto;
-    padding-bottom: 0.5rem;
+    padding: 0.25rem 0.25rem 0.75rem 0.25rem;
     flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
   }
   .filter-btn {
     flex-shrink: 0;
+    scroll-snap-align: start;
+    font-size: 0.82rem;
+    padding: 0.5rem 1.1rem;
   }
 }
 
@@ -1229,7 +1241,7 @@ button, input, select, textarea {
   opacity: 0;
   visibility: hidden;
   transition: all var(--transition-base);
-  padding: 1.25rem;
+  padding: 1rem;
 }
 
 .lightbox-modal.active {
@@ -1239,8 +1251,8 @@ button, input, select, textarea {
 
 .lightbox-content {
   position: relative;
-  max-width: 92vw;
-  max-height: 88vh;
+  max-width: 94vw;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1248,7 +1260,7 @@ button, input, select, textarea {
 
 .lightbox-img {
   max-width: 100%;
-  max-height: 72vh;
+  max-height: 70vh;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
@@ -1259,49 +1271,53 @@ button, input, select, textarea {
   margin-top: 0.85rem;
   text-align: center;
   color: #ffffff;
+  padding: 0 0.5rem;
 }
 
 .lightbox-close-btn {
   position: absolute;
-  top: -46px;
+  top: -48px;
   right: 0;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #ffffff;
-  font-size: 1.5rem;
-  width: 42px;
-  height: 42px;
+  font-size: 1.4rem;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 10;
 }
 
 .lightbox-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(10, 17, 40, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(10, 17, 40, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: #ffffff;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   font-size: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 
-.lightbox-prev { left: -54px; }
-.lightbox-next { right: -54px; }
+.lightbox-prev { left: -56px; }
+.lightbox-next { right: -56px; }
 
 @media (max-width: 768px) {
-  .lightbox-prev { left: 8px; }
-  .lightbox-next { right: 8px; }
-  .lightbox-close-btn { top: -42px; right: 0; }
+  .lightbox-prev { left: 4px; }
+  .lightbox-next { right: 4px; }
+  .lightbox-close-btn { top: -44px; right: 0; }
 }
 
 /* ==========================================================================
@@ -1888,6 +1904,18 @@ textarea.form-control {
   cursor: pointer;
   transition: all var(--transition-base);
   text-decoration: none;
+  animation: pulseWaFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes pulseWaFloat {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.65);
+  }
 }
 
 .whatsapp-float:hover {

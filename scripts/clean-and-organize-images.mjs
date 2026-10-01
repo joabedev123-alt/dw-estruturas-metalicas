@@ -4,6 +4,7 @@ import crypto from 'crypto';
 
 // 1. Organizar imagens únicas em cada categoria
 const categories = [
+  { folder: 'assets/images/galpoes', prefix: 'galpao' },
   { folder: 'assets/images/mezanino', prefix: 'mezanino' },
   { folder: 'assets/images/pergolados', prefix: 'pergolado' },
   { folder: 'assets/images/gradil', prefix: 'gradil' },
@@ -47,8 +48,20 @@ categories.forEach(({ folder, prefix }) => {
   });
 
   const uniqueFiles = fs.readdirSync(tempDir);
+  const publicFolder = folder.replace('assets/', 'public/assets/');
+  fs.mkdirSync(publicFolder, { recursive: true });
+
+  // Limpar pasta public correspondente
+  if (fs.existsSync(publicFolder)) {
+    fs.readdirSync(publicFolder).forEach(f => {
+      const p = path.join(publicFolder, f);
+      if (fs.statSync(p).isFile()) fs.unlinkSync(p);
+    });
+  }
+
   uniqueFiles.forEach(f => {
     fs.copyFileSync(path.join(tempDir, f), path.join(folder, f));
+    fs.copyFileSync(path.join(tempDir, f), path.join(publicFolder, f));
   });
 
   fs.rmSync(tempDir, { recursive: true, force: true });

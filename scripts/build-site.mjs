@@ -4,6 +4,11 @@ import { renderPage, siteConfig, getWaLink } from './renderer.mjs';
 
 function writeHtml(filename, content) {
   fs.writeFileSync(filename, content, 'utf8');
+  if (fs.existsSync('public')) {
+    const publicPath = path.join('public', filename);
+    fs.mkdirSync(path.dirname(publicPath), { recursive: true });
+    fs.writeFileSync(publicPath, content, 'utf8');
+  }
   console.log(`Generated: ${filename}`);
 }
 
@@ -289,12 +294,46 @@ function generateHomePage() {
 
         <div class="gallery-filter-bar">
           <button class="filter-btn active" data-filter="all">Todas as Obras</button>
+          <button class="filter-btn" data-filter="galpoes">Galpões Metálicos</button>
           <button class="filter-btn" data-filter="mezanino">Mezaninos</button>
           <button class="filter-btn" data-filter="pergolados">Pergolados</button>
           <button class="filter-btn" data-filter="gradil">Gradis</button>
         </div>
 
         <div class="gallery-grid">
+          <!-- Galpões Metálicos -->
+          <div class="gallery-item" data-category="galpoes">
+            <img src="assets/images/galpoes/galpao-1.jpg" data-full="assets/images/galpoes/galpao-1.jpg" alt="Galpão metálico - Obra DW Estruturas Metálicas" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-category-badge">Galpão Metálico</span>
+              <div class="gallery-caption">
+                <span>Galpão Metálico</span>
+                <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="galpoes">
+            <img src="assets/images/galpoes/galpao-2.jpg" data-full="assets/images/galpoes/galpao-2.jpg" alt="Estrutura de galpão metálico - DW" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-category-badge">Galpão Metálico</span>
+              <div class="gallery-caption">
+                <span>Galpão Metálico</span>
+                <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="galpoes">
+            <img src="assets/images/galpoes/galpao-3.jpg" data-full="assets/images/galpoes/galpao-3.jpg" alt="Montagem de barracão metálico - DW" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-category-badge">Galpão Metálico</span>
+              <div class="gallery-caption">
+                <span>Galpão Metálico</span>
+                <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+              </div>
+            </div>
+          </div>
           <!-- Mezaninos -->
           <div class="gallery-item" data-category="mezanino">
             <img src="assets/images/mezanino/mezanino-1.jpg" data-full="assets/images/mezanino/mezanino-1.jpg" alt="Mezanino metálico - Obra DW Estruturas Metálicas" loading="lazy" />
@@ -766,18 +805,35 @@ function generateObrasPage() {
           <span class="badge-tag"><i class="bi bi-camera-fill"></i> GALERIA DE OBRAS REAIS</span>
           <h2 class="section-title">Portfólio de Estruturas Fabricadas e Instaladas</h2>
           <p class="section-lead">
-            Confira fotografias reais dos trabalhos executados pela DW Estruturas Metálicas. Categorias confirmadas: Mezaninos, Pergolados e Gradis.
+            Confira fotografias reais dos trabalhos executados pela DW Estruturas Metálicas em Curitiba e Região: Galpões, Mezaninos, Pergolados, Gradis, Alambrados e Escadas.
           </p>
         </div>
 
         <div class="gallery-filter-bar">
-          <button class="filter-btn active" data-filter="all">Todas as Fotos (${10 + 12 + 6})</button>
+          <button class="filter-btn active" data-filter="all">Todas as Fotos (66)</button>
+          <button class="filter-btn" data-filter="galpoes">Galpões (15)</button>
           <button class="filter-btn" data-filter="mezanino">Mezaninos (10)</button>
-          <button class="filter-btn" data-filter="pergolados">Pergolados (12)</button>
+          <button class="filter-btn" data-filter="pergolados">Pergolados (11)</button>
           <button class="filter-btn" data-filter="gradil">Gradis (6)</button>
+          <button class="filter-btn" data-filter="alambrados">Alambrados (10)</button>
+          <button class="filter-btn" data-filter="escadas">Escadas (14)</button>
         </div>
 
         <div class="gallery-grid">
+          <!-- Galpões (1 a 15) -->
+          ${[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(n => `
+            <div class="gallery-item" data-category="galpoes">
+              <img src="assets/images/galpoes/galpao-${n}.jpg" data-full="assets/images/galpoes/galpao-${n}.jpg" alt="Galpão metálico - Obra real DW" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Galpão Metálico</span>
+                <div class="gallery-caption">
+                  <span>Galpão Metálico #${n}</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
           <!-- Mezaninos (1 a 10) -->
           ${[1,2,3,4,5,6,7,8,9,10].map(n => `
             <div class="gallery-item" data-category="mezanino">
@@ -792,8 +848,8 @@ function generateObrasPage() {
             </div>
           `).join('')}
 
-          <!-- Pergolados (1 a 12) -->
-          ${[1,2,3,4,5,6,7,8,9,10,11,12].map(n => `
+          <!-- Pergolados (1 a 11) -->
+          ${[1,2,3,4,5,6,7,8,9,10,11].map(n => `
             <div class="gallery-item" data-category="pergolados">
               <img src="assets/images/pergolados/pergolado-${n}.jpg" data-full="assets/images/pergolados/pergolado-${n}.jpg" alt="Pergolado metálico sob medida - Obra real DW" loading="lazy" />
               <div class="gallery-overlay">
@@ -814,6 +870,34 @@ function generateObrasPage() {
                 <span class="gallery-category-badge">Gradil de Proteção</span>
                 <div class="gallery-caption">
                   <span>Gradil Metálico #${n}</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
+          <!-- Alambrados (1 a 10) -->
+          ${[1,2,3,4,5,6,7,8,9,10].map(n => `
+            <div class="gallery-item" data-category="alambrados">
+              <img src="assets/images/alambrados/alambrado-${n}.jpg" data-full="assets/images/alambrados/alambrado-${n}.jpg" alt="Alambrado e cercamento - Obra real DW" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Alambrados</span>
+                <div class="gallery-caption">
+                  <span>Alambrado #${n}</span>
+                  <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
+          <!-- Escadas (1 a 14) -->
+          ${[1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(n => `
+            <div class="gallery-item" data-category="escadas">
+              <img src="assets/images/escadas/escada-${n}.jpg" data-full="assets/images/escadas/escada-${n}.jpg" alt="Escada metálica sob medida - Obra real DW" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-category-badge">Escadas</span>
+                <div class="gallery-caption">
+                  <span>Escada Metálica #${n}</span>
                   <span class="gallery-zoom-icon"><i class="bi bi-arrows-fullscreen"></i></span>
                 </div>
               </div>
@@ -1028,6 +1112,8 @@ const servicesData = [
     primaryKw: 'galpão metálico Curitiba',
     secondaryKws: ['barracão metálico', 'construção de galpão', 'galpão pré-fabricado metálico', 'galpão industrial', 'construtora de galpão'],
     icon: 'bi-building',
+    photos: ['galpao-1.jpg', 'galpao-2.jpg', 'galpao-3.jpg', 'galpao-4.jpg', 'galpao-5.jpg', 'galpao-6.jpg', 'galpao-7.jpg', 'galpao-8.jpg'],
+    dirCategory: 'galpoes',
     intro: 'A DW projeta, fabrica e instala galpões e barracões metálicos sob medida em Curitiba e Região Metropolitana. Construímos estruturas metálicas do zero para atender demandas industriais, comerciais, logísticas e de armazenamento, unindo precisão fabril e montagem especializada.',
     applications: [
       'Galpões industriais e fábricas para linhas de produção',
@@ -1054,7 +1140,8 @@ const servicesData = [
     primaryKw: 'mezanino metálico Curitiba',
     secondaryKws: ['mezanino para loja', 'mezanino industrial', 'mezanino para depósito', 'mezanino com laje steel deck', 'mezanino para academia'],
     icon: 'bi-layers-half',
-    photos: ['mezanino-1.jpg', 'mezanino-2.jpg', 'mezanino-3.jpg', 'mezanino-4.jpg'],
+    photos: ['mezanino-1.jpg', 'mezanino-2.jpg', 'mezanino-3.jpg', 'mezanino-4.jpg', 'mezanino-5.jpg', 'mezanino-6.jpg'],
+    dirCategory: 'mezanino',
     intro: 'O mezanino metálico em Curitiba é a solução mais eficiente para dobrar a área útil de galpões, comércios, lojas e ambientes industriais sem necessidade de reformas civis complexas. A DW fabrica mezaninos sob medida com vigamento reforçado e montagem rápida.',
     applications: [
       'Mezaninos comerciais para lojas de shopping e rua',
@@ -1080,6 +1167,8 @@ const servicesData = [
     primaryKw: 'escada metálica Curitiba',
     secondaryKws: ['escada de ferro', 'escada caracol metálica', 'escada industrial', 'escada marinheiro', 'escada metálica para mezanino'],
     icon: 'bi-ladder',
+    photos: ['escada-1.jpg', 'escada-2.jpg', 'escada-3.jpg', 'escada-4.jpg', 'escada-5.jpg', 'escada-6.jpg'],
+    dirCategory: 'escadas',
     intro: 'Projetamos e fabricamos escadas metálicas sob medida em Curitiba para acesso a mezaninos, galpões, coberturas e ambientes comerciais ou industriais, aliando robustez, ergonomia e acabamento de alto padrão.',
     applications: [
       'Escadas retas e em L para acesso a mezaninos e pisos superiores',
@@ -1148,7 +1237,8 @@ const servicesData = [
     primaryKw: 'pergolado metálico Curitiba',
     secondaryKws: ['pergolado de ferro', 'pergolado com vidro', 'pergolado com policarbonato', 'pergolado para área gourmet', 'pergolado para garagem'],
     icon: 'bi-grid-3x3',
-    photos: ['pergolado-1.jpg', 'pergolado-2.jpg', 'pergolado-5.jpg', 'pergolado-10.jpg'],
+    photos: ['pergolado-1.jpg', 'pergolado-2.jpg', 'pergolado-3.jpg', 'pergolado-4.jpg', 'pergolado-5.jpg', 'pergolado-6.jpg'],
+    dirCategory: 'pergolados',
     intro: 'O pergolado metálico une estética arquitetônica moderna e resistência contra intempéries. A DW projeta, fabrica e instala pergolados em aço sob medida para residências, comércios e condomínios em Curitiba e Região.',
     applications: [
       'Pergolados para áreas gourmet e espaços de churrasqueira',
@@ -1259,6 +1349,8 @@ const servicesData = [
     primaryKw: 'alambrado Curitiba',
     secondaryKws: ['alambrado para quadra', 'alambrado para terreno', 'cercamento com alambrado', 'tela de alambrado'],
     icon: 'bi-grid-fill',
+    photos: ['alambrado-1.jpg', 'alambrado-2.jpg', 'alambrado-3.jpg', 'alambrado-4.jpg', 'alambrado-5.jpg', 'alambrado-6.jpg'],
+    dirCategory: 'alambrados',
     intro: 'Instalamos alambrados de alta resistência em Curitiba e Região Metropolitana para cercamento de terrenos, indústrias, áreas esportivas e propriedades comerciais, com postes metálicos firmes e telas duráveis.',
     applications: [
       'Cercamento de quadras poliesportivas e campos de futebol',
@@ -1281,7 +1373,8 @@ const servicesData = [
     primaryKw: 'gradil Curitiba',
     secondaryKws: ['gradil de proteção', 'gradil para muro', 'gradil para condomínio', 'grade de ferro', 'gradil galvanizado'],
     icon: 'bi-border-width',
-    photos: ['gradil-1.jpg', 'gradil-2.jpg', 'gradil-3.jpg', 'gradil-6.jpg'],
+    photos: ['gradil-1.jpg', 'gradil-2.jpg', 'gradil-3.jpg', 'gradil-4.jpg', 'gradil-5.jpg', 'gradil-6.jpg'],
+    dirCategory: 'gradil',
     intro: 'A DW projeta, fabrica e instala gradis metálicos de proteção em Curitiba para muros, frentes de imóveis, condomínios e perímetros comerciais, unindo máxima segurança e estética sofisticada.',
     applications: [
       'Gradis para muros e fechamentos frontais residenciais',
@@ -1346,7 +1439,7 @@ function generateServicePages() {
                 <p style="font-size: 0.92rem; color: var(--text-dark-secondary);">Imagens de estruturas executadas pela equipe da DW:</p>
                 <div class="gallery-grid" style="margin-top: 1.5rem;">
                   ${s.photos.map(p => {
-                    const dir = s.slug.includes('mezanino') ? 'mezanino' : (s.slug.includes('pergolado') ? 'pergolados' : 'gradil');
+                    const dir = s.dirCategory || (s.slug.includes('galpao') ? 'galpoes' : (s.slug.includes('mezanino') ? 'mezanino' : (s.slug.includes('pergolado') ? 'pergolados' : (s.slug.includes('escada') ? 'escadas' : (s.slug.includes('alambrado') ? 'alambrados' : 'gradil')))));
                     return `
                       <div class="gallery-item" data-category="${dir}">
                         <img src="assets/images/${dir}/${p}" data-full="assets/images/${dir}/${p}" alt="${s.primaryKw} executado pela DW Estruturas Metálicas" loading="lazy" />
